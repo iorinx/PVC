@@ -1,0 +1,21 @@
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "81B-ON-GFd"; */
+"81B-ON-GFd.normalTitle" = "OK";
+
+/* Class = "UIBarButtonItem"; title = "キャンセル"; ObjectID = "KQa-pR-bNv"; */
+"KQa-pR-bNv.title" = "キャンセル";
+
+/* Class = "UINavigationItem"; title = "検索結果"; ObjectID = "cW2-oy-OcA"; */
+"cW2-oy-OcA.title" = "検索結果";
+
+/* Class = "UINavigationItem"; title = "ナンバープレートを認識"; ObjectID = "hiu-7s-Pmd"; */
+"hiu-7s-Pmd.title" = "ナンバープレートを認識";
+
+/* Class = "UIBarButtonItem"; title = "キャンセル"; ObjectID = "jvf-pZ-FUS"; */
+"jvf-pZ-FUS.title" = "キャンセル";
+
+/* Class = "UILabel"; text = "確認後、OKボタンを押して下さい"; ObjectID = "pbp-e2-PwX"; */
+"pbp-e2-PwX.text" = "確認後、OKボタンを押して下さい";
+
+/* Class = "UINavigationItem"; title = "ナンバープレートにあわせて下さい"; ObjectID = "q2N-18-HAO"; */
+"q2N-18-HAO.title" = "ナンバープレートにあわせて下さい";

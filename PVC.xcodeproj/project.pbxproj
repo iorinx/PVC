@@ -12,6 +12,8 @@
 		5937FCC72139809000B6D044 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5937FCC52139809000B6D044 /* Main.storyboard */; };
 		5937FCC92139809500B6D044 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5937FCC82139809500B6D044 /* Assets.xcassets */; };
 		5937FCCC2139809500B6D044 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5937FCCA2139809500B6D044 /* LaunchScreen.storyboard */; };
+		5961AC0B2165E7A800791D8B /* DetailPictureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5961AC0A2165E7A800791D8B /* DetailPictureController.swift */; };
+		59A661402164666400F2A194 /* ImageClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 59A6613F2164666400F2A194 /* ImageClassifier.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,10 @@
 		5937FCC82139809500B6D044 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5937FCCB2139809500B6D044 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5937FCCD2139809500B6D044 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5961AC062165D49000791D8B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		5961AC072165D49100791D8B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		5961AC0A2165E7A800791D8B /* DetailPictureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPictureController.swift; sourceTree = "<group>"; };
+		59A6613F2164666400F2A194 /* ImageClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ImageClassifier.mlmodel; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +62,10 @@
 			children = (
 				5937FCC12139809000B6D044 /* AppDelegate.swift */,
 				5937FCC32139809000B6D044 /* ViewController.swift */,
+				5961AC0A2165E7A800791D8B /* DetailPictureController.swift */,
 				5937FCC52139809000B6D044 /* Main.storyboard */,
 				5937FCC82139809500B6D044 /* Assets.xcassets */,
+				59A6613F2164666400F2A194 /* ImageClassifier.mlmodel */,
 				5937FCCA2139809500B6D044 /* LaunchScreen.storyboard */,
 				5937FCCD2139809500B6D044 /* Info.plist */,
 			);
@@ -96,6 +104,7 @@
 				TargetAttributes = {
 					5937FCBD2139809000B6D044 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -136,7 +145,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5937FCC42139809000B6D044 /* ViewController.swift in Sources */,
+				59A661402164666400F2A194 /* ImageClassifier.mlmodel in Sources */,
 				5937FCC22139809000B6D044 /* AppDelegate.swift in Sources */,
+				5961AC0B2165E7A800791D8B /* DetailPictureController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +158,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				5937FCC62139809000B6D044 /* Base */,
+				5961AC062165D49000791D8B /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -155,6 +167,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				5937FCCB2139809500B6D044 /* Base */,
+				5961AC072165D49100791D8B /* ja */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -166,6 +179,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -226,6 +240,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -281,16 +296,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CWFVL33D55;
+				DEVELOPMENT_TEAM = M55SD9V2SG;
 				INFOPLIST_FILE = PVC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = iori.PVC;
+				PRODUCT_BUNDLE_IDENTIFIER = ioring.PVC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -299,16 +314,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CWFVL33D55;
+				DEVELOPMENT_TEAM = M55SD9V2SG;
 				INFOPLIST_FILE = PVC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = iori.PVC;
+				PRODUCT_BUNDLE_IDENTIFIER = ioring.PVC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
