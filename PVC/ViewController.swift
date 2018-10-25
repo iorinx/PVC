@@ -11,8 +11,10 @@ import AVFoundation
 
 class ViewController: UIViewController, UINavigationControllerDelegate, UIGestureRecognizerDelegate, AVCapturePhotoCaptureDelegate{
 
+    @IBOutlet weak var label: UILabel!
     @IBOutlet weak var cameraButton: UIButton!
-    
+    @IBOutlet weak var progressBarView: UIView!
+    //@IBOutlet weak var cameraView: UIView!
     var input:AVCaptureDeviceInput!
     var output:AVCapturePhotoOutput!
     var session:AVCaptureSession!
@@ -44,10 +46,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIGestur
         session = AVCaptureSession()
         
         // 背面・前面カメラの選択
-        camera = AVCaptureDevice.default(
-            AVCaptureDevice.DeviceType.builtInWideAngleCamera,
-            for: AVMediaType.video,
-            position: .back) // position: .front
+        camera = AVCaptureDevice.default(AVCaptureDevice.DeviceType.builtInWideAngleCamera, for: AVMediaType.video, position: .back) // position: .front
         
         // カメラからの入力データ
         do {
@@ -72,15 +71,14 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIGestur
         
         // セッションからプレビューを表示を
         let previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        
         previewLayer.frame = preView.bounds
         previewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.landscapeRight
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        
+        //previewLayer.preferredFrameSize()
+    
         // レイヤーをViewに設定
         // これを外すとプレビューが無くなる、けれど撮影はできる
         self.view.layer.addSublayer(previewLayer)
-        self.view.bringSubviewToFront(cameraButton)
         session.startRunning()
     }
     
@@ -89,17 +87,20 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIGestur
         let screenWidth = UIScreen.main.bounds.size.width;
         //スクリーンの高さ
         let screenHeight = UIScreen.main.bounds.size.height;
-        
         // プレビュー用のビューを生成
-        preView = UIView(frame: CGRect(x: 0.0, y: 0.0,
-                                       width: screenWidth, height: screenHeight))
+        preView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: screenWidth, height: screenHeight))
+        
+        
     }
     
     func setupButton(){
+        self.view.bringSubviewToFront(label)
+        self.view.bringSubviewToFront(cameraButton)
         cameraButton.layer.borderColor = UIColor.white.cgColor
         cameraButton.layer.borderWidth = 7
         cameraButton.clipsToBounds = true
         cameraButton.layer.cornerRadius = 40
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -126,36 +127,17 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIGestur
     
     @IBAction func onCameraButtonTapped(_ sender: Any) {
         takePicture()
-//        let storyboard: UIStoryboard = self.storyboard!
-//        let  toDetailPic = storyboard.instantiateViewController(withIdentifier: "toDetailPic")
-//        self.present(toDetailPic, animated: true, completion: nil)
+
     }
     
     func takePicture(){
         let photoSettings = AVCapturePhotoSettings()
         photoSettings.flashMode = .off
-        photoSettings.isAutoStillImageStabilizationEnabled = true
+        photoSettings.isAutoStillImageStabilizationEnabled = false
         photoSettings.isHighResolutionPhotoEnabled = false
         output?.capturePhoto(with: photoSettings, delegate: self)
         
     }
-    
-//    func photoOutput(_ output: AVCapturePhotoOutput, didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings, error: Error?) {
-//        if let error = error {
-//            print("Error capturing photo: \(error)")
-//            return
-//        }
-//
-//        guard photoData != nil else {
-//            print("No photo data resource")
-//            return
-//        }
-//
-//        //DetailPictureControllerに写真を渡す
-//        let photo = UIImage(data: thumbnailData!)
-//        let image = UIImage(cgImage: photo!.cgImage!, scale: photo!.scale, orientation: .up)
-//        carNumPic = image
-//    }
     
     func photoOutput(_ output: AVCapturePhotoOutput,
                     didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
@@ -163,7 +145,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIGestur
             print("Error capturing photo: \(error)")
         } else {
             photoData = photo.fileDataRepresentation()
-            print("OK")
         }
         
         // Check if UIImage could be initialized with image data
@@ -191,8 +172,16 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIGestur
         // 後ほど保存するためのData変数
         thumbnailData = imageToSave.pngData()
         carNumPic = imageToSave
-        //画像を保存してから画面遷移
-        performSegue(withIdentifier: "toDetailPic", sender: nil)
+        
+        self.view.bringSubviewToFront(progressBarView)
+        progressBarView.isHidden = false
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.7) {
+            //画像を保存してから画面遷移
+            self.performSegue(withIdentifier: "toDetailPic", sender: nil)
+            self.progressBarView.isHidden = true
+            
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
@@ -201,4 +190,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIGestur
             detpicVC.selectedImg = carNumPic
         }
     }
+
 }
+
+
