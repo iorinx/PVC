@@ -12,9 +12,11 @@ class ResultViewController: UIViewController {
 
     var carNumString: String?
     
+    @IBOutlet weak var resurtLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        resurtLabel.text = "登録されています"
         // Do any additional setup after loading the view.
     }
     

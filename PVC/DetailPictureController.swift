@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Vision
 
 
 class DetailPictureController: UIViewController, UINavigationControllerDelegate, AVCapturePhotoCaptureDelegate,  UITextFieldDelegate {
@@ -22,8 +23,10 @@ class DetailPictureController: UIViewController, UINavigationControllerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getNumber()
         detailPic.image = selectedImg
         carNumber.delegate = self
+        
         // キーボードを開く際に呼び出す通知
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         
@@ -43,14 +46,33 @@ class DetailPictureController: UIViewController, UINavigationControllerDelegate,
     }
     
     func getNumber() {
-         
+        // Load the ML model through its generated class
+        guard let coreMLModel = try? VNCoreMLModel(for: ImageClassifier().model) else {
+            fatalError("can't load Places ML model")
+        }
         
+        _ = VNCoreMLRequest(model: coreMLModel) { request, error in
+            // results は confidence の高い（そのオブジェクトである可能性が高い）
+            // 順番に sort された Array で返ってきます
+            guard let results = request.results as? [VNClassificationObservation] else { return }
+            
+            if let classification = results.first {
+                self.carNumber.text = classification.identifier
+               // print(self.carNumber.text)
+                //self.confidenceLabel.text = "\(classification.confidence)"
+            }
+            // captureImageはカメラのキャプチャー画像
+            guard let ciImage = CIImage(image: self.selectedImg) else { return }
+            // VNImageRequestHandlerを作成し、performを実行
+            let handler = VNImageRequestHandler(ciImage: ciImage, options: [:])
+            guard (try? handler.perform([request])) != nil else { return }
+        }
     }
     
     // キーボード表示時
     @objc func keyboardShow() {
         // キーボードを開く際に画面を上にずらす
-        self.view.bounds = CGRectMake(0, 270, self.view.frame.size.width, self.view.frame.size.height)
+        self.view.bounds = CGRectMake(0, 370, self.view.frame.size.width, self.view.frame.size.height)
     }
     
     // キーボード非表示時

@@ -82,9 +82,9 @@
 				5937FCC32139809000B6D044 /* ViewController.swift */,
 				5961AC0A2165E7A800791D8B /* DetailPictureController.swift */,
 				596633F121730B7400D7B487 /* ResultViewController.swift */,
+				59A6613F2164666400F2A194 /* ImageClassifier.mlmodel */,
 				5937FCC52139809000B6D044 /* Main.storyboard */,
 				5937FCC82139809500B6D044 /* Assets.xcassets */,
-				59A6613F2164666400F2A194 /* ImageClassifier.mlmodel */,
 				5937FCCA2139809500B6D044 /* LaunchScreen.storyboard */,
 				5937FCCD2139809500B6D044 /* Info.plist */,
 			);
